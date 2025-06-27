@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Favorite Movies</h2>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <strong>{{ movie.name }}</strong> – {{ movie.director }} ({{ movie.year }})
+                <br>
+                <img src="{{ movie.poster_url }}" alt="Poster" width="100">
+            </li>
+        {% else %}
+            <li>No movies yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add Movie</h3>
+    <form method="post">
+        <input type="text" name="name" placeholder="Title" required><br>
+        <input type="text" name="director" placeholder="Director"><br>
+        <input type="number" name="year" placeholder="Year"><br>
+        <input type="text" name="poster_url" placeholder="Poster URL"><br>
+        <button type="submit">Add Movie</button>
+    </form>
+
+    <br><a href="{{ url_for('index') }}">← Back to Users</a>
+{% endblock %}

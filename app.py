@@ -41,9 +41,26 @@ def delete_user(user_id):
     return redirect(url_for('index'))
 
 
-@app.route('/users/<int:user_id>/movies')
+@app.route('/users/<int:user_id>/movies', methods=['GET', 'POST'])
 def list_movies(user_id):
-    return f"Here should be the movies for user {user_id}"
+    if request.method == 'POST':
+        name = request.form.get('name')
+        director = request.form.get('director')
+        year = request.form.get('year')
+        poster_url = request.form.get('poster_url')
+
+        if name:
+            try:
+                year = int(year)
+            except (TypeError, ValueError):
+                year = None  # Optional
+            data_manager.add_movie(name, director, year, poster_url, user_id)
+
+        return redirect(url_for('list_movies', user_id=user_id))
+
+    movies = data_manager.get_movies(user_id)
+    return render_template('movies.html', movies=movies, user_id=user_id)
+
 
 
 if __name__ == '__main__':
