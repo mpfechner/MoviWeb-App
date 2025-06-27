@@ -46,3 +46,14 @@ class DataManager:
         if movie:
             db.session.delete(movie)
             db.session.commit()
+
+    def get_user(self, user_id: int) -> User | None:
+        """Get a user by ID."""
+        return User.query.get(user_id)
+
+    def update_user(self, user_id: int, new_name: str) -> None:
+        """Update a user's name."""
+        user = User.query.get(user_id)
+        if user:
+            user.name = new_name
+            db.session.commit()

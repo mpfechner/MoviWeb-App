@@ -88,6 +88,17 @@ def edit_movie(user_id, movie_id):
     return render_template('edit_movie.html', movie=movie, user_id=user_id)
 
 
+@app.route('/users/<int:user_id>/edit', methods=['GET', 'POST'])
+def edit_user(user_id):
+    user = data_manager.get_user(user_id)
+
+    if request.method == 'POST':
+        new_name = request.form.get('name')
+        if new_name:
+            data_manager.update_user(user_id, new_name)
+            return redirect(url_for('index'))
+
+    return render_template('edit_user.html', user=user)
 
 
 if __name__ == '__main__':
