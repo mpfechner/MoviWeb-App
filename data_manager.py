@@ -27,11 +27,17 @@ class DataManager:
         db.session.add(movie)
         db.session.commit()
 
-    def update_movie(self, movie_id: int, new_title: str) -> None:
-        """Update the title of an existing movie."""
+    def get_movie(self, movie_id: int) -> Movie | None:
+        """Return a movie by its ID."""
+        return Movie.query.get(movie_id)
+
+    def update_movie(self, movie_id: int, name: str, director: str, year: int) -> None:
+        """Update a movie's information."""
         movie = Movie.query.get(movie_id)
         if movie:
-            movie.name = new_title
+            movie.name = name
+            movie.director = director
+            movie.year = year
             db.session.commit()
 
     def delete_movie(self, movie_id: int) -> None:

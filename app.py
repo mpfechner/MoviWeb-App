@@ -68,6 +68,26 @@ def delete_movie(user_id, movie_id):
     return redirect(url_for('list_movies', user_id=user_id))
 
 
+@app.route('/users/<int:user_id>/movies/<int:movie_id>/edit', methods=['GET', 'POST'])
+def edit_movie(user_id, movie_id):
+    movie = data_manager.get_movie(movie_id)
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        director = request.form.get('director')
+        year = request.form.get('year')
+
+        try:
+            year = int(year)
+        except (TypeError, ValueError):
+            year = None
+
+        data_manager.update_movie(movie_id, name, director, year)
+        return redirect(url_for('list_movies', user_id=user_id))
+
+    return render_template('edit_movie.html', movie=movie, user_id=user_id)
+
+
 
 
 if __name__ == '__main__':
