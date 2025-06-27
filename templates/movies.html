@@ -8,6 +8,10 @@
                 <strong>{{ movie.name }}</strong> – {{ movie.director }} ({{ movie.year }})
                 <br>
                 <img src="{{ movie.poster_url }}" alt="Poster" width="100">
+                <form method="post" action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.id) }}" style="display:inline;">
+    <button type="submit">🗑️</button>
+</form>
+
             </li>
         {% else %}
             <li>No movies yet.</li>
