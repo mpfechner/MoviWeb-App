@@ -1,0 +1,8 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 2rem;
+}
+
+form input {
+    margin-bottom: 0.5rem;
+}
