@@ -2,6 +2,10 @@
 
 {% block content %}
     <h2>Favorite Movies</h2>
+
+    <a href="{{ url_for('add_movie_from_api', user_id=user_id) }}">📥 Add from OMDb</a> |
+    <a href="#add-movie-form">➕ Add manually</a>
+
     <ul>
         {% for movie in movies %}
             <li>
@@ -9,18 +13,16 @@
                 <br>
                 <img src="{{ movie.poster_url }}" alt="Poster" width="100">
                 <form method="post" action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie.id) }}" style="display:inline;">
-    <button type="submit">🗑️</button>
-</form>
+                    <button type="submit">🗑️</button>
+                </form>
                 <a href="{{ url_for('edit_movie', user_id=user_id, movie_id=movie.id) }}">🖊️</a>
-
-
             </li>
         {% else %}
             <li>No movies yet.</li>
         {% endfor %}
     </ul>
 
-    <h3>Add Movie</h3>
+    <h3 id="add-movie-form">Add Movie</h3>
     <form method="post">
         <input type="text" name="name" placeholder="Title" required><br>
         <input type="text" name="director" placeholder="Director"><br>

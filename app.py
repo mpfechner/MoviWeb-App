@@ -101,5 +101,27 @@ def edit_user(user_id):
     return render_template('edit_user.html', user=user)
 
 
+@app.route('/users/<int:user_id>/add_from_api', methods=['GET', 'POST'])
+def add_movie_from_api(user_id):
+    if request.method == 'POST':
+        title = request.form.get('title')
+        data = data_manager.fetch_movie_data(title)
+
+        if data:
+            data_manager.add_movie(
+                name=data['name'],
+                director=data['director'],
+                year=data['year'],
+                poster_url=data['poster_url'],
+                user_id=user_id
+            )
+            return redirect(url_for('list_movies', user_id=user_id))
+        else:
+            return "Movie not found or API error.", 404
+
+    return render_template('add_from_api.html', user_id=user_id)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

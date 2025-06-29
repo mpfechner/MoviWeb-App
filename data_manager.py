@@ -1,3 +1,4 @@
+import requests
 from models import db, User, Movie
 
 class DataManager:
@@ -57,3 +58,19 @@ class DataManager:
         if user:
             user.name = new_name
             db.session.commit()
+
+    def fetch_movie_data(self, title: str) -> dict | None:
+        """Fetch movie details from OMDb API by title."""
+        api_key = "f821c8bd"
+        url = f"http://www.omdbapi.com/?t={title}&apikey={api_key}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            if data.get("Response") == "True":
+                return {
+                    "name": data.get("Title"),
+                    "director": data.get("Director"),
+                    "year": int(data.get("Year")) if data.get("Year") and data["Year"].isdigit() else None,
+                    "poster_url": data.get("Poster")
+                }
+        return None
