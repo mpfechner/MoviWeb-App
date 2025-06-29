@@ -103,6 +103,8 @@ def edit_user(user_id):
 
 @app.route('/users/<int:user_id>/add_from_api', methods=['GET', 'POST'])
 def add_movie_from_api(user_id):
+    error = None
+
     if request.method == 'POST':
         title = request.form.get('title')
         data = data_manager.fetch_movie_data(title)
@@ -117,9 +119,10 @@ def add_movie_from_api(user_id):
             )
             return redirect(url_for('list_movies', user_id=user_id))
         else:
-            return "Movie not found or API error.", 404
+            error = f"❌ Film '{title}' wurde nicht gefunden oder es gab ein API-Problem."
 
-    return render_template('add_from_api.html', user_id=user_id)
+    return render_template('add_from_api.html', user_id=user_id, error=error)
+
 
 
 
