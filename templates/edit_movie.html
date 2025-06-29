@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Edit Movie</h2>
+  <h2>✏️ Edit Movie</h2>
+
   <form method="post">
-    <input type="text" name="name" value="{{ movie.name }}" required><br>
-    <input type="text" name="director" value="{{ movie.director }}"><br>
-    <input type="number" name="year" value="{{ movie.year }}"><br>
-    <button type="submit">Save</button>
+    <label for="name">Title:</label>
+    <input type="text" id="name" name="name" value="{{ movie.name }}" required>
+
+    <label for="director">Director:</label>
+    <input type="text" id="director" name="director" value="{{ movie.director }}">
+
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="year" value="{{ movie.year }}">
+
+    <button type="submit" class="button">Save</button>
   </form>
+
   <br>
-  <a href="{{ url_for('list_movies', user_id=user_id) }}">← Back to Movie List</a>
+  <a href="{{ url_for('list_movies', user_id=user_id) }}" class="button">← Back to Movie List</a>
 {% endblock %}
