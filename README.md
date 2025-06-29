@@ -99,7 +99,3 @@ This project is open source and free to use for personal or educational purposes
 
 ```
 
----
-
-Wenn du willst, kann ich dir beim Hochladen auf GitHub helfen, ein Projekt-Icon generieren oder eine deutsche Version dazupacken. Sag einfach Bescheid 😎📘
-```
