@@ -2,12 +2,16 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
+    """Database model for application users."""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=False)
     movies = db.relationship('Movie', backref='user', lazy=True)
 
+
 class Movie(db.Model):
+    """Database model for movies linked to users."""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=False)
     director = db.Column(db.String)
