@@ -1,6 +1,4 @@
-Aber natürlich, Michael – hier ist eine saubere, strukturierte `README.md`, die dein **MoviWeb Flask-Projekt** beschreibt. Du kannst sie direkt verwenden oder bei Bedarf noch ergänzen:
 
----
 
 ### ✅ `README.md`
 
